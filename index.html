@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ketan Gemoy</title>
+
+<style>
+:root {
+  --primary: #ff6b00;
+  --bg: #f8f8f8;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  background: var(--bg);
+}
+
+/* HEADER */
+header {
+  background: white;
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logoName {
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--primary);
+}
+
+.btn {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn:hover {
+  opacity: 0.9;
+}
+
+/* MENU */
+.container {
+  padding: 30px;
+}
+
+.menu {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  transition: 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card-top {
+  height: 120px;
+  background: #f3e3c3;
+}
+
+.card-body {
+  padding: 16px;
+}
+
+.price {
+  color: var(--primary);
+  font-weight: bold;
+}
+
+/* ADDON */
+.addon {
+  margin: 10px 0;
+}
+
+.addon span {
+  background: #eee;
+  padding: 5px 10px;
+  border-radius: 10px;
+  margin-right: 5px;
+  font-size: 12px;
+}
+
+/* CART */
+.cart {
+  position: fixed;
+  right: -350px;
+  top: 0;
+  width: 320px;
+  height: 100%;
+  background: white;
+  padding: 20px;
+  transition: 0.3s;
+  box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+}
+
+#cartNotification {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background: red;
+  color: white;
+  border-radius: 50%;
+  padding: 5px 10px;
+  font-size: 12px;
+  display: none; /* Awalnya disembunyikan */
+}
+
+.cart.active {
+  right: 0;
+}
+
+.cart h3 {
+  color: var(--primary);
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.cart-item h4 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.cart-item .quantity {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cart-item .quantity button {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.cart-item .quantity button:hover {
+  opacity: 0.9;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--primary);
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  color: red;
+}
+
+.total {
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/* MODAL */
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+}
+
+.modal .close-btn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--primary);
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.modal .close-btn:hover {
+  color: red;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+}
+
+/* FOOTER */
+footer {
+  background: var(--primary);
+  color: white;
+  text-align: center;
+  padding: 20px 0;
+  margin-top: 20px;
+}
+
+.footer-content h3 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.footer-content p {
+  margin: 5px 0 15px;
+  font-size: 14px;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.social-icon {
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.social-icon:hover {
+  transform: scale(1.1);
+}
+
+
+</style>
+
+</head>
+<body>
+
+<header>
+    <div class="brand">
+      <div><img src="Logo_Gemoy.jpeg" alt="Logo" style="height: 40px;"></div>
+      <div class="logoName">Ketan Gemoy</div>
+    </div>
+    
+    <div style="position: relative;">
+  <img src="Cart_logo.png" alt="Keranjang" style="height: 40px; cursor: pointer;" onclick="toggleCart()">
+  <span id="cartNotification" style="position: absolute; top: -10px; right: -10px; background: red; color: white; border-radius: 50%; padding: 5px 10px; font-size: 12px; display: none;">0</span>
+</div>
+</header>
+
+<div class="container">
+  <h2>Menu Pilihan</h2>
+  <div class="menu" id="menu"></div>
+</div>
+
+<!-- CART -->
+<div class="cart" id="cart">
+  <button class="close-btn" onclick="toggleCart()">X</button>
+  <h3>Keranjang Belanja</h3>
+  <div id="cartItems"></div>
+  <div class="total">
+    <span>Total:</span>
+    <span id="total">Rp 0</span>
+  </div>
+  <button class="btn" onclick="checkout()">Checkout Sekarang</button>
+</div>
+
+<!-- CHECKOUT -->
+<div class="modal" id="checkoutModal">
+    <button class = "close-btn" onclick= "closeCheckout()">X</button> 
+  <h3>Checkout</h3>
+  <input id="nama" placeholder="Nama">
+  <input id="wa" placeholder="No WA">
+  <textarea id="alamat" placeholder="Alamat"></textarea>
+  <button class="btn" onclick="submitOrder()">Kirim</button>
+</div>
+
+<script>
+const products = [
+  { name: "Original", price: 8000, image: "Original.png" },
+  { name: "Mangga Original", price: 10000, image: "Mangga_original.jpg" },
+  { name: "Milo", price: 10000, image: "milo.jpeg" },
+  { name: "Mangga Milo", price: 12000, image: "mangga_milo.png" },
+  { name: "Tiramisu", price: 10000, image: "tiramisu.jpeg" },
+  { name: "Mangga Tiramisu", price: 12000, image: "mangga_tiramisu.png" },
+  { name: "Choco Crunchy", price: 10000, image: "Choco_chrunchy.jpeg" },
+  { name: "Mangga Choco Crunchy", price: 12000, image: "mangga_chocoCrunchy.png" }
+];
+
+let cart = [];
+
+function renderMenu() {
+  const menu = document.getElementById("menu");
+
+  products.forEach((p, i) => {
+    menu.innerHTML += `
+      <div class="card">
+        <div class="card-top">
+          <img src="${p.image}" alt="${p.name}" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+        <div class="card-body">
+          <h4>Ketan Gemoy ${p.name}</h4>
+          <p class="price">Rp ${p.price}</p>
+
+          <div class="addon">
+            <span>Keju +1k</span>
+            <span>Oreo +1k</span>
+          </div>
+
+          <button class="btn" onclick="addToCart(${i})">
+            Tambah ke Keranjang
+          </button>
+        </div>
+      </div>
+    `;
+  });
+}
+
+function addToCart(i) {
+  let item = cart.find(x => x.name === products[i].name);
+
+  if (item) {
+    item.qty++;
+  } else {
+    cart.push({ ...products[i], qty: 1 });
+  }
+
+  updateCartNotification();
+  renderCart();
+}
+
+function updateCartNotification() {
+  const notification = document.getElementById("cartNotification");
+  const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+
+  if (totalItems > 0) {
+    notification.style.display = "block";
+    notification.textContent = totalItems;
+  } else {
+    notification.style.display = "none";
+  }
+}
+
+function renderCart() {
+  const el = document.getElementById("cartItems");
+  el.innerHTML = "";
+  let total = 0;
+
+  cart.forEach((item, i) => {
+    total += item.price * item.qty;
+
+    el.innerHTML += `
+      <div class="cart-item">
+        <h4>${item.name}</h4>
+        <div class="quantity">
+          <button onclick="decreaseQuantity(${i})">-</button>
+          <span>${item.qty}</span>
+          <button onclick="increaseQuantity(${i})">+</button>
+        </div>
+        <span>Rp ${item.price * item.qty}</span>
+      </div>
+    `;
+  });
+
+  document.getElementById("total").innerText = "Total: Rp " + total;
+}
+
+function increaseQuantity(index) {
+  cart[index].qty++;
+  updateCartNotification();
+  renderCart();
+}
+
+function decreaseQuantity(index) {
+  if (cart[index].qty > 1) {
+    cart[index].qty--;
+  } else {
+    cart.splice(index, 1); // Hapus item jika jumlahnya 0
+  }
+  updateCartNotification();
+  renderCart();
+}
+
+function toggleCart() {
+  document.getElementById("cart").classList.toggle("active");
+}
+
+function checkout() {
+  if (cart.length === 0) {
+    alert("Keranjang kosong");
+    return;
+  }
+  const modal = document.getElementById("checkoutModal");
+  modal.style.display = "flex"; // Tampilkan modal dengan display: flex
+}
+
+function closeCheckout() {
+  const modal = document.getElementById("checkoutModal");
+  modal.style.display = "none"; // Sembunyikan modal
+}
+
+function submitOrder() {
+  const nama = document.getElementById("nama").value;
+  const alamat = document.getElementById("alamat").value;
+  const wa = document.getElementById("wa").value;
+
+  let pesan = "Halo, saya mau order:%0A";
+
+  cart.forEach(item => {
+    pesan += `${item.name} x${item.qty}%0A`;
+  });
+
+  pesan += `%0ANama: ${nama}`;
+  pesan += `%0AAlamat: ${alamat}`;
+  pesan += `%0AWA: ${wa}`;
+
+  window.open("https://wa.me/62895372774329?text=" + pesan);
+}
+
+renderMenu();
+</script>
+
+</body>
+
+<footer>
+  <div class="footer-content">
+    <h3>Contact Us</h3>
+    <p>Hubungi kami melalui media sosial berikut:</p>
+    <div class="social-links">
+      <a href="https://www.instagram.com/ketangemoy" target="_blank">
+        <img src="logo_ig.png" alt="Instagram" class="social-icon">
+      </a>
+      <a href="https://wa.me/62895372774329" target="_blank">
+        <img src="logo_wa.png" alt="WhatsApp" class="social-icon">
+      </a>
+    </div>
+  </div>
+</footer>
+
+</html>
