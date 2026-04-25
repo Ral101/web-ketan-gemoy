@@ -1,7 +1,7 @@
 const products = [
   { name: "Original", price: 8000, image: "Original.png" },
   { name: "Mangga Original", price: 10000, image: "Mangga_original.jpg" },
-  { name: "Milo", price: 10000, image: "milo.jpeg" },
+  { name: "Milo", price: 10000, image: "Milo.jpeg" },
   { name: "Mangga Milo", price: 12000, image: "mangga_milo.png" },
   { name: "Tiramisu", price: 10000, image: "tiramisu.jpeg" },
   { name: "Mangga Tiramisu", price: 12000, image: "mangga_tiramisu.png" },
